@@ -16,4 +16,5 @@ Library.objects.get(name=library_name)
 
 #retrieve the librarian for a library
 library_name = "alx_library"
-Librarian.objects.get(library__name=library_name)
+library= Library.objects.get(name=library_name)
+Librarian.objects.get(library=library)
