@@ -3,8 +3,10 @@ from django.forms import  modelform_factory
 from django.views.generic import ListView
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from django.contrib.auth.decorators import user_passes_test, permission_required
-from .models import Book, Library
+from django.contrib.auth.decorators import permission_required
+from django.contrib.auth.decorators import user_passes_test
+from .models import Book
+from .models import Library
 from .forms import  BookForm, DeleleBookForm
 
 # Create your views here.
