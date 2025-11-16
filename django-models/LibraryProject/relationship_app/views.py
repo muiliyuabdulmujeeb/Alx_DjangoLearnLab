@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from django.forms import  modelform_factory
-from django.views.generic import ListView
+from django.views.generic.detail import DetailView
 from django.contrib.auth import login, logout
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.decorators import permission_required
@@ -42,7 +42,7 @@ def logout_view(request):
     logout(request)
     return render(request, "relationship_app/logout.html")
 
-class LibraryListView(ListView):
+class LibraryDetailView(DetailView):
     queryset= Library.objects.get(name= "alx_library")
     template_name= "relationship_app/library_detail.html"
     context_object_name= "library"

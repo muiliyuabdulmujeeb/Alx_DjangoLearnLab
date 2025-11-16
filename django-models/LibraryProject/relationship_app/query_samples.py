@@ -4,7 +4,8 @@ from .models import Book, Library, Librarian
 
 #query all books by a specific author
 author_name = "James St. Patrick"
-Book.objects.filter(author__name= author_name)
+books= Book.objects.filter(author__name= author_name)
+books.all()
 
 #list all books in a library
 library_name = "alx_library"
