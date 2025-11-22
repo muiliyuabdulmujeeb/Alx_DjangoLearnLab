@@ -22,7 +22,7 @@ def create_article(request):
 @permission_required("bookshelf.can_view", raise_exception= True)
 def book_list(request):
     articles = ExampleForm.objects.all()
-    return render(request, "bookshelf/articles.html", {"articles": articles})
+    return render(request, "bookshelf/book_list.html", {"articles": articles})
 
 @permission_required("bookshelf.can_edit", raise_exception= True)
 def edit_article(request):
