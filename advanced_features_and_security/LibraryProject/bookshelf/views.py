@@ -20,7 +20,7 @@ def create_article(request):
     return render(request, "bookshelf/create-article.html", {"form": form})
 
 @permission_required("bookshelf.can_view", raise_exception= True)
-def view_article(request):
+def book_list(request):
     articles = ArticleForm.objects.all()
     return render(request, "bookshelf/articles.html", {"articles": articles})
 
