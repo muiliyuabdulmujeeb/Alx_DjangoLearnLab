@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'api',
     #third party apps
     'rest_framework',
+    'rest_framework.authtoken'
 ]
 
 MIDDLEWARE = [
@@ -53,6 +54,12 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'api_project.urls'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': {
+        "rest_framework.authentication.TokenAuthentication"
+    }
+}
 
 TEMPLATES = [
     {
