@@ -19,7 +19,7 @@ class BookSerializer(serializers.ModelSerializer):
 
 class AuthorSerializer(serializers.ModelSerializer):
     """Author serializer that takes into account the books each author has"""
-    books = BookSerializer(many= True)
+    books = BookSerializer(many=True, read_only=True)
 
     class Meta:
         model= Author
