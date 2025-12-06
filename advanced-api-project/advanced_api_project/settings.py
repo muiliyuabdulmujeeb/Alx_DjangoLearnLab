@@ -43,6 +43,7 @@ INSTALLED_APPS = [
 
     #thrid party apps
     'rest_framework',
+    'django-filters'
 ]
 
 MIDDLEWARE = [

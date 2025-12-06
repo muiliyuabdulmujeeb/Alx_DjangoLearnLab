@@ -1,17 +1,23 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView, RetrieveAPIView, CreateAPIView, UpdateAPIView, DestroyAPIView
 from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticated
+from rest_framework.filters import SearchFilter, OrderingFilter
+from django_filters.rest_framework import DjangoFilterBackend
 from .models import Book
 from .serializers import BookSerializer
 
 # Create your views here.
 
 class ListView(ListAPIView):
-    """ for listing all books in the database"""
+    """ for listing all books in the database, with permissions and can be filtered, ordered and also has search capabilities"""
 
     queryset = Book.objects.all()
     serializer_class = BookSerializer
     permission_classes = [IsAuthenticatedOrReadOnly]
+    filter_backends =[DjangoFilterBackend, SearchFilter, OrderingFilter]
+    filterset_fields = ["title", "author", "publication_year"]
+    search_fields = ["title", "author"]
+    ordering_fields = ["title", "publication_year"]
 
 class DetailView(RetrieveAPIView):
     """ for getting the details of a particular book"""
