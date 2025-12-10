@@ -15,7 +15,7 @@ def create_user(request):
     else:
         form = BlogUserCreationForm()
     
-    return render(request, "blog/registration.html", context={"form": form})
+    return render(request, "blog/register.html", context={"form": form})
 
 @login_required(login_url="login")
 def user_profile(request):
