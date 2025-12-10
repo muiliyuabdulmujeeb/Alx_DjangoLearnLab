@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <h1>User Profile</h1>
+    <section>
+        <ul>
+            <li>
+                <p>First Name</p>
+                <p>{{ user.first_name }}</p>
+            </li>
+            <li>
+                <p>Last Name</p>
+                <p>{{ user.last_name }}</p>
+            </li>
+            <li>
+                <p>Email</p>
+                <p>{{ user.email }}</p>
+            </li>
+            <li>
+                <p>Username</p>
+                <p>{{ user.username }}</p>
+            </li>
+            <li>
+                <p>User Bio</p>
+                <p>{{ user.bio }}</p>
+            </li>
+        </ul>
+    </section>
+    <br>
+    <br>
+    <form method="post" action="{% url 'profile' %}">
+        <h2>Edit User Profile</h2>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Edit</button>
+    </form>
+    <a href="{% url 'logout' %}">Back to Posts</a>
+</body>
+</html>
