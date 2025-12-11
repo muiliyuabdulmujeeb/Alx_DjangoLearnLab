@@ -1,0 +1,12 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+    <h3>{{ blogpost.title }}</h3>
+    <p>{{ blogpost.content }}</p>
+    <p>Author: {{ blogpost.author }}</p>
+    <p>Created at: {{ blogpost.published_date }}</p>
+    <p>Last edit at: {{ blogpost.last_editted }}</p>
+    {% if request.user == blogpost.author %}
+        <a href="{% url 'delete_blogpost' blogpost.pk %}"><button>Delete</button></a>
+    {% endif %}
+{% endblock %}
