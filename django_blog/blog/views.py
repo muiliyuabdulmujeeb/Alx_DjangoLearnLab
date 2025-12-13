@@ -4,7 +4,6 @@ from django.urls import reverse_lazy
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from datetime import datetime
 from blog_auth.models import BlogUser
 from .models import Post
 from .forms import BlogUserCreationForm, BlogUserUpdateForm, BlogPostCreateForm, BlogPostUpdateForm
@@ -46,7 +45,7 @@ class BlogPostCreateView(LoginRequiredMixin, CreateView):
     """Class based view for creating a blogpost. A user must be signed in to be able to create a blogpost"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/create_blogpost.html"
+    template_name= "blog/createblog.html"
     model= Post
     form_class = BlogPostCreateForm
     success_url = reverse_lazy("blogposts")
@@ -59,7 +58,7 @@ class BlogPostListView(LoginRequiredMixin, ListView):
     """Class based view for listing all blogposts, A user has to be signed in to be able to view them"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/list_blogpost.html"
+    template_name= "blog/listblog.html"
     context_object_name= "blogposts"
     queryset= Post.objects.all()
 
@@ -67,7 +66,7 @@ class BlogPostDetailView(LoginRequiredMixin, DetailView):
     """Class based view for the detail of a specific blogpost, A user has to be signed in to be able to view them"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/detail_blogpost.html"
+    template_name= "blog/detailblog.html"
     context_object_name = "blogpost"
     queryset= Post.objects.all()
 
@@ -75,7 +74,7 @@ class BlogPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Class based view for updating a blogpost, A user has to be signed in and be its author to be able to edit them"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/update_blogpost.html"
+    template_name= "blog/updateblog.html"
     context_object_name= "blogpost"
     model= Post
     form_class= BlogPostUpdateForm
