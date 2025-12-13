@@ -45,7 +45,7 @@ class BlogPostCreateView(LoginRequiredMixin, CreateView):
     """Class based view for creating a blogpost. A user must be signed in to be able to create a blogpost"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/createblog.html"
+    template_name= "blog/post_create.html"
     model= Post
     form_class = BlogPostCreateForm
     success_url = reverse_lazy("blogposts")
@@ -58,7 +58,7 @@ class BlogPostListView(LoginRequiredMixin, ListView):
     """Class based view for listing all blogposts, A user has to be signed in to be able to view them"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/listblog.html"
+    template_name= "blog/post_list.html"
     context_object_name= "blogposts"
     queryset= Post.objects.all()
 
@@ -66,7 +66,7 @@ class BlogPostDetailView(LoginRequiredMixin, DetailView):
     """Class based view for the detail of a specific blogpost, A user has to be signed in to be able to view them"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/detailblog.html"
+    template_name= "blog/post_detail.html"
     context_object_name = "blogpost"
     queryset= Post.objects.all()
 
@@ -74,7 +74,7 @@ class BlogPostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """Class based view for updating a blogpost, A user has to be signed in and be its author to be able to edit them"""
 
     login_url=reverse_lazy("login")
-    template_name= "blog/updateblog.html"
+    template_name= "blog/post_update.html"
     context_object_name= "blogpost"
     model= Post
     form_class= BlogPostUpdateForm
