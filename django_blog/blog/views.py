@@ -1,4 +1,4 @@
-from django.db.models.query import QuerySet
+from django.db.models.query import QuerySet, Q
 from django.shortcuts import render, redirect
 from django.contrib.auth import login
 from django.urls import reverse_lazy, reverse
@@ -157,3 +157,29 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     
     def get_success_url(self):
         return reverse("detail_blogpost", kwargs={"pk": self.kwargs["post_id"]})
+
+class SearchView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = "blog/search_results.html"
+    context_object_name = "posts"
+
+    def get_queryset(self):
+        query = self.request.GET.get("q")
+
+        if not query:
+            return Post.objects.none()
+
+        return Post.objects.filter(
+            Q(title__icontains=query) |
+            Q(content__icontains=query) |
+            Q(tags__name__icontains=query)
+        )
+
+class TagView(LoginRequiredMixin, ListView):
+    model = Post
+    template_name = "blog/search_results.html"
+    context_object_name = "posts"
+    
+    def get_queryset(self):
+        tag_name= self.kwargs["tag_name"]
+        return Post.objects.filter(tags__name= tag_name)
