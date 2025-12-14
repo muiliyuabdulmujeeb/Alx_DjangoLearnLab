@@ -7,6 +7,27 @@
     <p>Created at: {{ blogpost.published_date }}</p>
     <p>Last edit at: {{ blogpost.last_editted }}</p>
     {% if request.user == blogpost.author %}
-        <a href="{% url 'delete_blogpost' blogpost.pk %}"><button>Delete</button></a>
+        <a href="{% url 'delete_blogpost' blogpost.pk %}"><button>Delete Post</button></a>
     {% endif %}
+
+    <h3>Comments</h3>
+    {% if blogpost_comments %}
+        {% for blogpost_comment in blogpost_comments %}
+            <a href="{% url 'detail_blogpost_comment' blogpost.pk blogpost_comment.pk %}">{{ blogpost_comment.content|truncatewords:5 }}</a>
+        {% endfor %}
+    {% endif %}
+    {% if blogpost_comment_detail %}
+        <p>{{ blogpost_comment.content|truncatewords:5 }}</p>
+        <p>{{ blogpost_comment.author__firstname }}</p>
+        {% if blogpost_comment.author == request.user %}
+            <a href="{% url 'update_blogpost_comment' blogpost.pk blogpost_comment.pk %}">Edit commment</a>
+            <a href="{% url 'delete_blogpost_comment' blogpost.pk blogpost_comment.pk %}">Delete commment</a>
+    {% endif %}
+
+    <h3>Add a new comment</h3>
+    <form action="{% url 'create_blogpost_comment' %}" method="post">
+        {% csrf_token %}
+        {% form.as_p %}
+        <button type="submit">Create</button>
+    </form>
 {% endblock %}
