@@ -175,11 +175,11 @@ class SearchView(LoginRequiredMixin, ListView):
             Q(tags__name__icontains=query)
         )
 
-class TagView(LoginRequiredMixin, ListView):
+class PostByTagListView(LoginRequiredMixin, ListView):
     model = Post
     template_name = "blog/search_results.html"
     context_object_name = "posts"
     
     def get_queryset(self):
-        tag_name= self.kwargs["tag_name"]
-        return Post.objects.filter(tags__name= tag_name)
+        tag_slug= self.kwargs["tag_slug"]
+        return Post.objects.filter(tags__slug= tag_slug)
