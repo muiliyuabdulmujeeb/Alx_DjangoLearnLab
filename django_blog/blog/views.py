@@ -130,7 +130,7 @@ class CommentCreateView(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
     
     def get_success_url(self):
-        return reverse('detail_blogpost', kwargs={"pk": self.kwargs.get("post_id")})
+        return reverse('detail_blogpost', kwargs={"pk": self.kwargs.get("pk")})
 
 class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     login_url = reverse_lazy("login")
@@ -139,7 +139,7 @@ class CommentUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model= Comment
     
     def test_func(self):
-        comment_id = self.kwargs["comment_id"]
+        comment_id = self.kwargs["pk"]
         comment = Comment.objects.get(pk= comment_id)
         return self.request.user == comment.author
 
@@ -151,7 +151,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model= Comment
 
     def test_func(self):
-        comment_id = self.kwargs["comment_id"]
+        comment_id = self.kwargs["pk"]
         comment = Comment.objects.get(pk= comment_id)
         return self.request.user == comment.author
     
