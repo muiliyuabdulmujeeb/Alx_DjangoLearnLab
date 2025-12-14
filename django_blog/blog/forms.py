@@ -26,5 +26,5 @@ class BlogPostUpdateForm(forms.ModelForm):
 
 class CommentForm(forms.ModelForm):
     class Meta:
-        model= Comment
-        fields= ["content"]
+        model = Comment
+        fields = ["content"]
