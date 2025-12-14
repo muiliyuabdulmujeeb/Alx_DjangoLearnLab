@@ -20,11 +20,20 @@ class BlogPostCreateForm(forms.ModelForm):
     class Meta:
         model= Post
         fields= ["title", "content"]
+        widgets = {
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "content": forms.Textarea(attrs={"rows": 5}),
+        }
 
 class BlogPostUpdateForm(forms.ModelForm):
+    tags = TagField(required=None, widget=TagWidget())
     class Meta:
         model= Post
         fields= ["title", "content"]
+        widgets = {
+            "title": forms.TextInput(attrs={"class": "form-control"}),
+            "content": forms.Textarea(attrs={"rows": 5}),
+        }
 
 class CommentForm(forms.ModelForm):
     class Meta:
