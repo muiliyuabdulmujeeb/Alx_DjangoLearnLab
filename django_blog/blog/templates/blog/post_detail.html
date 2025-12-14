@@ -18,16 +18,17 @@
     {% endif %}
     {% if blogpost_comment_detail %}
         <p>{{ blogpost_comment.content|truncatewords:5 }}</p>
-        <p>{{ blogpost_comment.author__firstname }}</p>
+        <p>{{ blogpost_comment.author.firstname }}</p>
         {% if blogpost_comment.author == request.user %}
             <a href="{% url 'update_blogpost_comment' blogpost.pk blogpost_comment.pk %}">Edit commment</a>
             <a href="{% url 'delete_blogpost_comment' blogpost.pk blogpost_comment.pk %}">Delete commment</a>
+        {% endif %}     
     {% endif %}
 
     <h3>Add a new comment</h3>
-    <form action="{% url 'create_blogpost_comment' %}" method="post">
+    <form action="{% url 'create_blogpost_comment' blogpost.pk %}" method="post">
         {% csrf_token %}
-        {% form.as_p %}
+        {{ form.as_p }}
         <button type="submit">Create</button>
     </form>
 {% endblock %}

@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.forms import UserCreationForm
+from taggit.forms import TagField, TagWidget
 from .models import BlogUser, Post, Comment
 
 
@@ -15,6 +16,7 @@ class BlogUserUpdateForm(forms.ModelForm):
         fields= ["first_name", "last_name", "email", "username", "bio"]
 
 class BlogPostCreateForm(forms.ModelForm):
+    tags = TagField(required=None, widget=TagWidget())
     class Meta:
         model= Post
         fields= ["title", "content"]
